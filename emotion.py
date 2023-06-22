@@ -152,5 +152,49 @@ recall = recall_score(y_test, pred_test_MNB,average='weighted')#823
 accuracy = accuracy_score(y_test, pred_test_MNB)
 print('Precision: {} / Recall: {} / Accuracy: {}'.format(np.round(precision, 3), np.round(recall, 3), np.round(accuracy, 3)))
 
+#LinearSVC 0.86 (Best Accuracy)
+em_model_lin = LinearSVC().fit(X_train, y_train)      #training model on data
+y_pred = em_model_lin.predict(X_test)          #
+precision = precision_score(y_test, y_pred,average='weighted')
+recall = recall_score(y_test, y_pred,average='weighted')#823
+accuracy = accuracy_score(y_test, y_pred)
+print('Precision: {} / Recall: {} / Accuracy: {}'.format(np.round(precision, 3), np.round(recall, 3), np.round(accuracy, 3)))
+print(confusion_matrix(y_test,y_pred))
+print (classification_report(y_test, y_pred))
+
+
+#code to test model initially
+text = 'he fell in love'
+X = tfidf_vec_fit.transform([text])
+pred = em_model_lin.predict(X)
+if pred[0]=='love':
+    print('love')
+else:
+    print('normal')
+
+
+#function to test model
+def predict_emotion(sample_text,model):
+    vect=tfidf_vec_fit.transform([sample_text])
+    prediction=model.predict(vect)
+    print(prediction[0])
+
+t = 'he is sobbing'
+predict_emotion(t,em_model_lin)
+
+
+with open('tfidf_vec_fit.pickle', 'wb') as handle:
+    pickle.dump(tfidf_vec_fit,handle)
+# save the model to disk
+filename = 'linear.sav'
+pickle.dump(em_model_lin, open(filename, 'wb'))
+
+with open('tfidf_vec_fit.pickle', 'rb') as handle:
+    tfidf_vec_fit_loaded = pickle.load(handle)    #store the loaded-vectorizer to a varable to use it
+with open('linear.sav', 'rb') as handle:
+    em_model_lin_loaded = pickle.load(handle)     #store the loaded-model to a varable to use it
+
+
+predict_emotion(t,em_model_lin_loaded)  #test loaded-model
 
 
