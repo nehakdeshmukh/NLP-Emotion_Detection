@@ -135,3 +135,22 @@ recall = recall_score(y_test, pred_test_MNB,average='weighted')
 accuracy = accuracy_score(y_test, pred_test_MNB)
 print('Precision: {} / Recall: {} / Accuracy: {}'.format(np.round(precision, 3), np.round(recall, 3), np.round(accuracy, 3)))
 
+
+#Tree 0.81
+em_model = tree.DecisionTreeClassifier().fit(X_train, y_train)
+pred_test_MNB = em_model.predict (X_test)
+precision = precision_score(y_test, pred_test_MNB,average='weighted')
+recall = recall_score(y_test, pred_test_MNB,average='weighted')
+accuracy = accuracy_score(y_test, pred_test_MNB)#806
+print('Precision: {} / Recall: {} / Accuracy: {}'.format(np.round(precision, 3), np.round(recall, 3), np.round(accuracy, 3)))
+
+#SVC 0.82
+em_model = SVC().fit(X_train, y_train)
+pred_test_MNB = em_model.predict(X_test)
+precision = precision_score(y_test, pred_test_MNB,average='weighted')
+recall = recall_score(y_test, pred_test_MNB,average='weighted')#823
+accuracy = accuracy_score(y_test, pred_test_MNB)
+print('Precision: {} / Recall: {} / Accuracy: {}'.format(np.round(precision, 3), np.round(recall, 3), np.round(accuracy, 3)))
+
+
+
