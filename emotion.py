@@ -179,7 +179,7 @@ def predict_emotion(sample_text,model):
     prediction=model.predict(vect)
     print(prediction[0])
 
-t = 'he is sobbing'
+t = 'he is smiling'
 predict_emotion(t,em_model_lin)
 
 
@@ -196,5 +196,3 @@ with open('linear.sav', 'rb') as handle:
 
 
 predict_emotion(t,em_model_lin_loaded)  #test loaded-model
-
-
